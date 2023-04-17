@@ -1,3 +1,26 @@
-.App {
-  background-color: #F7F9FD;
+.box {
+    position: absolute;
+    top: 50%;
+    width: 200px;
+    height: 200px;
+    animation: move 2s ease-in-out;
+}
+
+.left {
+    left: 0;
+    background-color: yellow;
+}
+
+.right {
+    right: 0;
+    background-color: blue;
+}
+
+@keyframes move {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(100%);
+    }
 }

@@ -3,12 +3,23 @@ import {SearchIcon} from "./Icon";
 import {useMovieApi} from "./hooks/useMovieApi";
 import Search from "./components/Search";
 
+
 export default function App() {
+
+
+    return (
+        <Homepage />
+    );
+}
+
+
+const Homepage = () => {
+
 
     const {searchTerm, results, setSearchTerm} = useMovieApi()
 
     return (
-        <div className="App" style={{minHeight: "2000px"}}>
+        <div className="App" style={{minHeight: "1000px"}}>
             <div className={`grid h-screen place-items-center ${searchTerm && 'h-[40vh]'}`}>
                 <div className="w-[800px] mx-auto flex justify-center relative flex-col gap-y-4">
                     <input type="text"
@@ -33,5 +44,6 @@ export default function App() {
                 </div>
             </div>
         </div>
-    );
+
+    )
 }
