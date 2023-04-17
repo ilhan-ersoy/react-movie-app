@@ -2,20 +2,39 @@ import React from 'react';
 import {SearchIcon} from "./Icon";
 import {useMovieApi} from "./hooks/useMovieApi";
 import Search from "./components/Search";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+} from "react-router-dom";
 
 
 export default function App() {
 
-
     return (
-        <Homepage />
+        <Router>
+            <Switch>
+                <Route exact path="/">
+                    <Homepage />
+                </Route>
+                <Route path="/about">
+                    <div>
+                        about
+                    </div>
+                </Route>
+                <Route path="/dashboard">
+                    <div>
+                        dashboard
+                    </div>
+                </Route>
+            </Switch>
+        </Router>
     );
 }
 
 
 const Homepage = () => {
-
-
     const {searchTerm, results, setSearchTerm} = useMovieApi()
 
     return (
@@ -29,7 +48,6 @@ const Homepage = () => {
                     <span className="absolute right-3 top-2">
                 <SearchIcon size={32}/>
             </span>
-
                     {searchTerm
                         &&
                         <div className={"container flex flex-col relative cursor-pointer"}>
