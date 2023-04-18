@@ -15,7 +15,6 @@ const List = () => {
         return <div>Loading...</div>;
     }
 
-
     return (
         <div style={{ backgroundColor: "#F7F9FD" }} className={"p-10 w-full m-8 shadow rounded flex flex-col item-center"}>
             <>

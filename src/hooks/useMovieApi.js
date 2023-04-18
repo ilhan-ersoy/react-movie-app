@@ -1,10 +1,18 @@
 import {useEffect, useState} from "react";
+import { useSelector, useDispatch } from "react-redux";
+
 
 export const useMovieApi = (id) => {
 
     const [searchTerm, setSearchTerm] = useState("");
     const [results, setResults] = useState([]);
     const [movies, setMovies] = useState(null);
+    
+    const distpach = useDispatch();
+    const query = useSelector(state => state.app.data)
+
+    console.log(query);
+
 
     useEffect(() => {
         const url = `http://www.omdbapi.com/?s=${id}&apikey=6cdfc728`; // OMDB API URL'si
@@ -13,6 +21,7 @@ export const useMovieApi = (id) => {
             .then(response => response.json())
             .then(data => {
                 setMovies(data);
+                distpach(setMovies(data))
             })
             .catch(error => console.log(error));
     }, [id]);
@@ -31,10 +40,7 @@ export const useMovieApi = (id) => {
             setResults([])
         }
     }, [searchTerm]);
-
-
-
+    
 
     return {searchTerm, setSearchTerm, results, setResults, movies}
-
 }
