@@ -15,7 +15,7 @@ export const useMovieApi = (id) => {
 
 
     useEffect(() => {
-        const url = `http://www.omdbapi.com/?s=${id}&apikey=6cdfc728`; // OMDB API URL'si
+        const url = `https://www.omdbapi.com/?s=${id}&apikey=6cdfc728`; // OMDB API URL'si
 
         fetch(url)
             .then(response => response.json())
