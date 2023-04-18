@@ -1,67 +1,58 @@
-import React from 'react';
-import {SearchIcon} from "./Icon";
-import {useMovieApi} from "./hooks/useMovieApi";
-import Search from "./components/Search";
+import React from "react";
 import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link
 } from "react-router-dom";
+import './App.scss';
 
+import Home from "./components/Home";
+
+import List from "./components/List";
 
 export default function App() {
 
     return (
         <Router>
-            <Switch>
-                <Route exact path="/">
-                    <Homepage />
-                </Route>
-                <Route path="/about">
-                    <div>
-                        about
-                    </div>
-                </Route>
-                <Route path="/dashboard">
-                    <div>
-                        dashboard
-                    </div>
-                </Route>
-            </Switch>
+            <div>
+                <Switch>
+                    <Route exact={"/"} path={'/'} children={<Home />}/>
+                </Switch>
+
+                <Switch>
+                    <Route path="/movies/:id" children={<List />}/>
+                </Switch>
+
+            </div>
         </Router>
     );
 }
 
+// const List = () => {
+//     let {id} = useParams();
 
-const Homepage = () => {
-    const {searchTerm, results, setSearchTerm} = useMovieApi()
+//     const {movies} = useMovieApi(id);
 
-    return (
-        <div className="App" style={{minHeight: "1000px"}}>
-            <div className={`grid h-screen place-items-center ${searchTerm && 'h-[40vh]'}`}>
-                <div className="w-[800px] mx-auto flex justify-center relative flex-col gap-y-4">
-                    <input type="text"
-                           className="border-2 p-3 outline-none placeholder-black h-15 rounded-xl bg-white w-full px-4"
-                           value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}
-                           placeholder="Bulmak istediğiniz filmin adını yazınız"/>
-                    <span className="absolute right-3 top-2">
-                <SearchIcon size={32}/>
-            </span>
-                    {searchTerm
-                        &&
-                        <div className={"container flex flex-col relative cursor-pointer"}>
-                            <div
-                                className={"absolute top-20 overflow-x-hidden overflow-y-scroll max-h-[500px] bg-white px-12 rounded shadow border-2"}>
-                                {results.slice(0, 2).map((result) => (
-                                    <Search img={result.Poster} title={result.Title}/>
-                                ))}
-                            </div>
-                        </div>
-                    }
-                </div>
-            </div>
-        </div>
+//     if (!movies) {
+//         return <div>Loading...</div>;
+//     }
 
-    )
-}
+
+//     return (
+//         <div style={{backgroundColor: "#F7F9FD"}} className={"h-[1200px] w-full m-8 shadow rounded"}>
+//             <div className={"flex justify-center"}>
+//                 <div className={"flex flex-col gap-y-3 w-[300px]"}>
+//                     <div className="flex items-center justify-between px-3 gap-x-2">
+//                             <span className={"text-[#5883FF]"}>
+//                                 Th için Sonuçlar
+//                             </span>
+//                             <div className={"text-xs opacity-50"}>
+//                                 {movies.Search.length} film bulundu
+//                             </div>
+//                     </div>
+//                     <div className={"w-full"} style={{backgroundColor: "#5883FF", height:2}}/>
+//                 </div>
+//             </div>
+//         </div>
+//     );
+// }

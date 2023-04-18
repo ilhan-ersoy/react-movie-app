@@ -1,10 +1,22 @@
 import {useEffect, useState} from "react";
-import axios from "axios";
 
-export const useMovieApi = () => {
+export const useMovieApi = (id) => {
 
     const [searchTerm, setSearchTerm] = useState("");
     const [results, setResults] = useState([]);
+    const [movies, setMovies] = useState(null);
+
+    useEffect(() => {
+        const url = `http://www.omdbapi.com/?s=${id}&apikey=6cdfc728`; // OMDB API URL'si
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                setMovies(data);
+            })
+            .catch(error => console.log(error));
+    }, [id]);
+
 
     useEffect(() => {
         async function fetchData() {
@@ -13,9 +25,9 @@ export const useMovieApi = () => {
             setResults(oldArray => [data,...oldArray] );
             console.log(data)
         }
-        fetchData();
+        fetchData().then(r => {});
 
-        if (searchTerm == "") {
+        if (searchTerm === "") {
             setResults([])
         }
     }, [searchTerm]);
@@ -23,6 +35,6 @@ export const useMovieApi = () => {
 
 
 
-    return {searchTerm, setSearchTerm, results, setResults}
+    return {searchTerm, setSearchTerm, results, setResults, movies}
 
 }
