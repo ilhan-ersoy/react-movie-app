@@ -6,6 +6,8 @@ import {
 import { useMovieApi } from "../../hooks/useMovieApi";
 import MovieCard from "../Search";
 
+import { useSelector } from "react-redux";
+
 const List = () => {
     let { id } = useParams();
 
@@ -15,6 +17,8 @@ const List = () => {
         return <div>Loading...</div>;
     }
 
+
+
     return (
         <div style={{ backgroundColor: "#F7F9FD" }} className={"p-10 w-full m-8 shadow rounded flex flex-col item-center"}>
             <>
@@ -22,7 +26,7 @@ const List = () => {
                 <div className={"flex flex-col gap-y-3 w-[300px]"}>
                     <div className="flex items-center justify-between px-3 gap-x-2">
                         <span className={"text-[#5883FF]"}>
-                            Th için Sonuçlar
+                            Arama için Sonuçlar
                         </span>
                         <div className={"text-xs opacity-50"}>
                             {movies.Search.length} film bulundu

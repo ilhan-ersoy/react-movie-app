@@ -11,7 +11,7 @@ export const useMovieApi = (id) => {
     const distpach = useDispatch();
     const query = useSelector(state => state.app.data)
 
-    console.log(query);
+ 
 
 
     useEffect(() => {

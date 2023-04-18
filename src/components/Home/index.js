@@ -1,19 +1,29 @@
+import { useDispatch, useSelector } from "react-redux";
 import { useMovieApi } from "../../hooks/useMovieApi";
 import { GoArrowIcon, SearchIcon } from "../../Icon";
 import MovieCard from "../Search";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-
+import { setQuery } from "../../Redux/appSlice";
 
 const Homepage = () => {
 
     const { searchTerm, results, setSearchTerm } = useMovieApi()
+    const dispatch = useDispatch()
 
+    const query = useSelector(state => state.app)
+
+    React.useEffect(() => {
+        dispatch(setQuery(searchTerm))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [searchTerm]);
+
+    console.log(query.query);
 
     return (
         <div className="App" style={{ minHeight: "1000px" }}>
-            <div className={`grid h-screen place-items-center ${searchTerm && 'h-[30vh]'}`}>
+            <div className={`grid place-items-center ${searchTerm ? 'h-[30vh]' : 'h-screen'}`}>
                 <div className="w-[800px] mx-auto flex justify-center relative flex-col gap-y-4">
                     <input type="text"
                         className="border-2 p-3 outline-none placeholder-black h-15 rounded-xl bg-white w-3/5 mx-auto lg:w-full px-4"
