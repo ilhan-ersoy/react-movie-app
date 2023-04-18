@@ -6,6 +6,7 @@ import MovieCard from "../Search";
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { setQuery } from "../../Redux/appSlice";
+import ThreeDotsWave from "../Loader";
 
 const Homepage = () => {
 
@@ -16,10 +17,12 @@ const Homepage = () => {
 
     React.useEffect(() => {
         dispatch(setQuery(searchTerm))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [searchTerm]);
 
     console.log(query.query);
+
+    console.log(searchTerm)
 
     return (
         <div className="App" style={{ minHeight: "1000px" }}>
@@ -44,13 +47,17 @@ const Homepage = () => {
                         }
                     </span>
                     {searchTerm
-                        &&
+                        ?
                         <div className={"container flex flex-col relative cursor-pointer"}>
                             <div g className={"absolute top-20 overflow-x-hidden overflow-y-scroll max-h-[700px] bg-white px-12 rounded shadow border-2 w-full"}>
                                 {results.slice(0, 2).map((result) => (
                                     <MovieCard img={result.Poster} title={result.Title} id={result.imdbID} />
                                 ))}
                             </div>
+                        </div>
+                        :
+                        <div>
+                            Not Found
                         </div>
                     }
                 </div>

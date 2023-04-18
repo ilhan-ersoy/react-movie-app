@@ -31,8 +31,8 @@ export const useMovieApi = (id) => {
         async function fetchData() {
             const response = await fetch(`https://www.omdbapi.com/?t=${searchTerm}&apikey=6cdfc728`);
             const data = await response.json();
-            setResults(oldArray => [data,...oldArray] );
-            console.log(data)
+            if (data.Response === "True") setResults(oldArray => [data,...oldArray] );
+            
         }
         fetchData().then(r => {});
 
